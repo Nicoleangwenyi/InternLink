@@ -18,6 +18,8 @@ class Admin extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    protected $guard = 'admin';
+
     /**
      * The attributes that are mass assignable.
      *
