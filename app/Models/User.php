@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'role',
+        'role_id', // Use role_id instead of role
     ];
 
     /**
@@ -52,15 +52,44 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
+     * Get the role associated with the user.
+     */
+    public function role()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Check if the user is an admin.
+     */
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
+    }
+
+    /**
+     * Check if the user is a student.
+     */
+    public function isStudent()
+    {
+        return $this->role_id === 3; 
+    }
+
+    /**
+     * Check if the user is an employer.
+     */
+    public function isEmployer()
+    {
+        return $this->role_id === 2; 
     }
 }
