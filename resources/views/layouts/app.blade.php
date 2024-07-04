@@ -21,7 +21,15 @@
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+            @if (auth()->user()->role_id == 1)
+                @include('layouts.navs.admin-nav')
+                    @elseif (auth()->user()->role_id == 2)
+                @include('layouts.navs.student-nav')
+                    @elseif (auth()->user()->role_id == 3)
+                @include('layouts.navs.employer-nav')
+            @endif
+
+            {{-- @livewire('navigation-menu') --}}
 
             <!-- Page Heading -->
             @if (isset($header))

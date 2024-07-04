@@ -5,14 +5,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployerController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ProfileController;
+
 
 Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/home', function () {
     return view('home');
 })->name('home');
 
@@ -30,12 +25,21 @@ Route::middleware([
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+
+});
+
+Route::middleware(['auth'])->group(function(){
+
+     //Admin Routes
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
+    //Student Routes
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
 
     //Employer Routes
     Route::get('/employer/dashboard', [EmployerController::class, 'index'])->name('employer.dashboard');
 
     Route::get('/employer/postInternships', [EmployerController::class, 'internships'])->name('employer.postInternships');
+
 });
+
