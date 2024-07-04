@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'role_id', // Use role_id instead of role
+        'role_id',
     ];
 
     /**
@@ -59,6 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role_id' => 'integer',
     ];
 
     /**
@@ -72,24 +73,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Check if the user is an admin.
      */
-    public function isAdmin()
-    {
-        return $this->role_id === 1;
-    }
 
-    /**
-     * Check if the user is a student.
-     */
-    public function isStudent()
-    {
-        return $this->role_id === 3; 
-    }
-
-    /**
-     * Check if the user is an employer.
-     */
-    public function isEmployer()
-    {
-        return $this->role_id === 2; 
-    }
+     public function hasRole($roleName)
+     {
+         return $this->role && $this->role->role_name === $roleName;
+     }
 }

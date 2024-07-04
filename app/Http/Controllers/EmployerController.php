@@ -10,4 +10,8 @@ class EmployerController extends Controller
     {
         return view('employer.dashboard');
     }
+
+    public function internships(){
+        return view('employer.postInternships');
+    }
 }
