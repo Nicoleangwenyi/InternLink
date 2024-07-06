@@ -31,21 +31,27 @@ Route::middleware([
 Route::middleware(['auth'])->group(function(){
 
      //Admin Routes
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/admin/manageusers', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
+    Route::get('/admin/manageusers', [AdminController::class, 'index'])->name('admin.manageUsers');
 
-    Route::get('/admin/manageusers', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
-    
-    Route::get('/admin/createuser', [AdminController::class, 'createUser'])->name('admin.createUser');
+    // Route to show the create user form
+    Route::get('admin/create', [AdminController::class, 'create'])->name('admin.create');
 
-    Route::post('/admin/createuser', [AdminController::class, 'storeUser'])->name('admin.storeUser');
+    // Route to store a new user
+    Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
 
-    Route::get('/admin/edituser/{id}', [AdminController::class, 'editUser'])->name('admin.editUser');
+    // Route to show a specific user
+    Route::get('admin/{user}', [AdminController::class, 'show'])->name('admin.show');
 
-    Route::post('/admin/edituser/{id}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+    // Route to show the edit user form
+    Route::get('admin/{user}/edit', [AdminController::class, 'edit'])->name('admin.edit');
 
-    Route::delete('/admin/deleteUser/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');;
+    // Route to update a user
+    Route::put('admin/{user}', [AdminController::class, 'update'])->name('admin.update');
+
+    // Route to delete a user
+    Route::delete('admin/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
 
     //Student Routes

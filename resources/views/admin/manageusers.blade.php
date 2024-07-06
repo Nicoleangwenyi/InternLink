@@ -1,66 +1,71 @@
-{{-- <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Users List
+        </h2>
+    </x-slot>
 
-    @include('layouts.app')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
 
-    <title>Manage Users</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Users List
+                        <a href="{{ route('admin.create') }}" class="btn btn-primary float-end">Add User</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->role->name }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('admin.show', $user->id) }}" class="btn btn-info">Show</a>
+                                        <form action="{{ route('admin.destroy', $user->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
-    <style>
-        .btn-primary {
-            background-color: green;
-            border-color: green;
-        }
-        .btn-danger {
-            background-color: red;
-            border-color: red;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Manage Users</h1>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->role->name }}</td>
-                        <td>
-                            <!-- Edit and Delete buttons -->
-                            <a href="{{ route('admin.editUser', $user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                            <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete('{{ route('admin.deleteUser', $user->id) }}')">Delete</button>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    {{ $users->links() }}
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+            <script>
+                // Example inline JavaScript
+                document.querySelectorAll('.btn-danger').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        if (!confirm('Are you sure you want to delete this user?')) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+            </script>
+        </div>
     </div>
-
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <script>
-        function confirmDelete(url) {
-            if (confirm('Are you sure you want to perform this action?')) {
-                window.location.href = url;
-            }
-        }
-    </script>
-</body>
-</html> --}}
+</x-app-layout>

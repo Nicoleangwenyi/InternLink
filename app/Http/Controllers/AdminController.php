@@ -2,88 +2,106 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function index()
+    /**
+     * Display the admin dashboard.
+     */
+    public function dashboard()
     {
         return view('admin.dashboard');
     }
-    public function manageUsers()
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        $users = User::with('role')->get();
-        
+        $users = User::with('role')->paginate(3);
+
         return view('admin.manageusers', compact('users'));
     }
 
-      /**
+    /**
      * Show the form for creating a new resource.
      */
-    public function createUser()
-{
-    $roles = Role::all();
-    return view('admin.createuser', compact('roles'));
-}
+    public function create()
+    {
+        $roles = Role::all(); // Fetch all roles from the database
+        return view('admin.create', compact('roles'));
+    }
 
-public function storeUser(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8|confirmed',
-        'role_id' => 'required|exists:roles,id',
-    ]);
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'role_id' => 'required|exists:roles,id',
+        ]);
 
-    User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-        'role_id' => $request->role_id,
-    ]);
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role_id' => $request->role_id,
+        ]);
 
-    return redirect()->route('admin.manageUsers')->with('success', 'User created successfully.');
-}
+        return redirect()->route('admin.manageUsers')->with('status', 'User Created Successfully');
+    }
 
-public function editUser($id)
-{
-    $user = User::findOrFail($id);
-    $roles = Role::all();
-    return view('admin.edituser', compact('user', 'roles'));
-}
+    /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        return view('admin.show', compact('user'));
+    }
 
-public function updateUser(Request $request, $id)
-{
-    $user = User::findOrFail($id);
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(User $user)
+    {
+        $roles = Role::all(); // Fetch all roles from the database
+        return view('admin.edit', compact('user', 'roles'));
+    }
 
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'password' => 'nullable|string|min:8|confirmed',
-        'role_id' => 'required|exists:roles,id',
-    ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, User $user)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'nullable|string|min:8',
+            'role_id' => 'required|exists:roles,id',
+        ]);
 
-    $user->update([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => $request->password ? Hash::make($request->password) : $user->password,
-        'role_id' => $request->role_id,
-    ]);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? bcrypt($request->password) : $user->password,
+            'role_id' => $request->role_id,
+        ]);
 
-    return redirect()->route('admin.manageUsers')->with('success', 'User updated successfully.');
-}
+        return redirect()->route('admin.manageUsers')->with('status', 'User Updated Successfully');
+    }
 
-public function deleteUser($id)
-{
-    $user = User::findOrFail($id);
-    $user->delete();
-
-    return redirect()->route('admin.manageUsers')->with('success', 'User deleted successfully.');
-}
-
-
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(User $user)
+    {
+        $user->delete();
+        return redirect()->route('admin.manageUsers')->with('status', 'User Deleted Successfully');
+    }
 }

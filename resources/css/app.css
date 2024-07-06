@@ -6,13 +6,3 @@
     display: none;
 }
 
-/* Custom button styles */
-.btn-edit {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-}
