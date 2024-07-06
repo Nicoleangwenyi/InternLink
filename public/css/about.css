@@ -35,7 +35,7 @@ body {
 }
 
 .about-img img {
-    width: 80%;
+    width: 100%;
     max-width: 100%; /* Ensure the image doesn't exceed its original size */
     height: auto;
 }
@@ -45,6 +45,7 @@ body {
 }
 
 .about-text h1 {
+    color: #0e4587;
     font-size: 3.9rem;
     font-weight: 900;
     margin-bottom: 20px;

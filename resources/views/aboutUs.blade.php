@@ -24,7 +24,7 @@
         <img src="{{ URL('images/about1.png') }}" alt="About Image">
     </div>
     <div class="about-text">
-        <h1 data-aos="fade-left" data-aos-duration="1400">About us</h1>
+        <h1 data-aos="fade-left" data-aos-duration="1400">About Us</h1>
         <p class="text" data-aos="fade-left" data-aos-duration="1400" data-aos-delay="200">
             Welcome to InternLink, your ultimate gateway to valuable internship opportunities. Our mission is to bridge the gap between ambitious students and dynamic organizations. At InternLink, we understand the crucial role internships play in shaping the careers of young professionals and the fresh perspectives interns bring to businesses.
         </p>
