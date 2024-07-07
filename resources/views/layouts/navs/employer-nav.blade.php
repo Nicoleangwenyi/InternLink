@@ -15,6 +15,15 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link href="{{ route('internships.index') }}" :active="request()->routeIs('internships.index')">
+                        {{ __('View Internships') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('internships.create') }}" :active="request()->routeIs('internships.create')">
+                        {{ __('Post Internship') }}
+                    </x-nav-link>
+                    
+
                 </div>
             </div>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\Admin\InternshipController;
+use App\Http\Controllers\InternshipsController;
 
 
 Route::get('/', function () {
@@ -74,7 +75,18 @@ Route::middleware(['auth'])->group(function(){
     //Employer Routes
     Route::get('/employer/dashboard', [EmployerController::class, 'index'])->name('employer.dashboard');
 
-    Route::get('/employer/postInternships', [EmployerController::class, 'internships'])->name('employer.postInternships');
+    
 
+    Route::get('internships', [InternshipsController::class, 'index'])->name('internships.index');
+
+    Route::resource('internships', InternshipsController::class)->names([
+        'index' => 'internships.index',
+        'create' => 'internships.create',
+        'store' => 'internships.store',
+        'show' => 'internships.show',
+        'edit' => 'internships.edit',
+        'update' => 'internships.update',
+        'destroy' => 'internships.destroy',
+    ]);
 });
 
