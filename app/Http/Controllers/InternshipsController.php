@@ -11,6 +11,14 @@ class InternshipsController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function  manageInternships(){
+        $employerId = Auth::user()->id;
+        $internships = Internships::where('company_id', $employerId)->get();
+
+        return view('admin.manageInternships', ['internships' => $internships]);
+
+     }
     public function index()
     {
         $internships = Internships::paginate(10);
