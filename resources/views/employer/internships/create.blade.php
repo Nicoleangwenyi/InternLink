@@ -1,16 +1,24 @@
 
 
 
-@extends('employer.internships.layouts')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Users List
+        </h2>
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if(session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-@section('content')
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Create InternShip
+                        <h4>Create Internship
                             <a href="{{ route('internships.index') }}"  class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>
@@ -62,7 +70,7 @@
                                 @error('application_deadline') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
 
-                            
+
 
                             <div class="mb-3">
                                 <label>Stipend/Salary</label>
@@ -109,7 +117,8 @@
                     </div>
                 </div>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
         </div>
     </div>
 
-@endsection
+</x-app-layout>
