@@ -1,0 +1,210 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays on top */
+    background: #fdf5fd;/* Add background to prevent transparency issues */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body{
+    background: #fdf5fd;
+}
+
+
+
+/* Container for the search bar */
+.box {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    padding: 20px;
+}
+
+/* Positioning the search bar */
+.search-box {
+    position: absolute;
+    left: 0; /* Align to the left */
+    top: 20%; /* 30% from the top */
+    margin-left: 20px; /* Optional: Add some margin from the left */
+    display: flex;
+    align-items: center;
+    flex: 1;
+
+}
+
+/* Styling the input field */
+.search-box input[type="text"] {
+    padding: 10px;
+    padding-right: 40px; /* To make space for the icon */
+    width: 300px; /* Set a width for the input */
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    border-radius: 25px;
+}
+
+.search-box input[type="text"]:hover {
+    border-color: #5900ff;
+}
+
+/* Styling the icon */
+.search-box .icon {
+    position: absolute;
+    right: 10px; /* Adjust this to position the icon correctly */
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+
+}
+
+.search-box .icon i {
+    font-size: 20px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.search-box .icon i:hover {
+    color: #1100ff;
+}
+
+/* Optional: Add some focus style */
+.search-box input[type="text"]:focus {
+    border-color: #1100ff;
+}
+
+.search-box input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+.autocomplete-suggestions {
+    top: 82%;
+    left: 15px;
+    width: 250px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    position: absolute;
+    z-index: 1000;
+    width: calc(100% - 20px);
+    margin-top: 5px;
+}
+.autocomplete-suggestion {
+    padding: 10px;
+    cursor: pointer;
+}
+.autocomplete-suggestion:hover {
+    background-color: #f0f0f0;
+}
+
+.internship-container {
+    flex: 3;
+    margin-left: 380px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+/* Styling for individual internship listings */
+.internship {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s ease;
+    width: 900px;
+    height: 210px;
+}
+
+.internship:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.internship h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.5em;
+}
+
+.internship p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.internship button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.internship button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 1200px) {
+    .box {
+        flex-direction: column;
+    }
+
+    .search-box {
+        position: relative;
+        top: 80px;
+        left: auto;
+        margin: 20px 0;
+    }
+
+    .search-box input[type="text"] {
+        width: 100%;
+    }
+    
+    .internship-container {
+        margin-left: 0;
+    }
+
+    .autocomplete-suggestions {
+        width: calc(100% - 40px);
+        left: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-box input[type="text"] {
+        width: 100%;
+    }
+
+    .autocomplete-suggestions {
+        width: calc(100% - 20px);
+        left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .internship h3 {
+        font-size: 1.2em;
+    }
+
+    .internship button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .autocomplete-suggestions {
+        width: calc(100% - 20px);
+        left: 0;
+    }
+}
