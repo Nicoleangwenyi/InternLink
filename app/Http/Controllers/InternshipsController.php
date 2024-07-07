@@ -13,7 +13,11 @@ class InternshipsController extends Controller
      */
     public function index()
     {
-        return view('employer.internships.index');
+        $internships = Internships::paginate(10);
+        return view('employer.internships.index', [
+            'internships'=> $internships]
+
+        );
     }
 
     /**

@@ -21,24 +21,46 @@
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Requirements</th>
-                                    <th>location</th>
+                                    <th>Location</th>
                                     <th>start Date</th>
                                     <th>End Date</th>
                                     <th>Application Deadline</th>
                                     <th>Contact Information</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($internships as $internship)
+                                <tr>
+                                    <td>{{ $internship->title }}</td>
+                                    <td>{{ $internship->description }}</td>
+                                    <td>{{ $internship->requirements }}</td>
+                                    <td>{{ $internship->location }}</td>
+                                    <td>{{ $internship->start_date }}</td>
+                                    <td>{{ $internship->end_date }}</td>
+                                    <td>{{ $internship->application_deadline }}</td>
+                                    <td>{{ $internship->contact_information }}</td>
 
+                                    <td>
+                                        <a href="{{ route('internships.edit', $internship->id) }}" class="btn btn-success">Edit</a>
+                                        <a href="{{ route('internships.show', $internship->id) }}" class="btn btn-info">Show</a>
 
-
+                                        {{--<form action="{{ route('internships.destroy', $category->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>--}}
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
 
-
+                        {{ $internships->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
