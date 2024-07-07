@@ -20,6 +20,10 @@
                         {{ __('Manage Users') }}
                     </x-nav-link>
 
+                    <x-nav-link href="{{ route('admin.manageInternships') }}" :active="request()->routeIs('admin.manageInternships')">
+                        {{ __('Manage Internships') }}
+                    </x-nav-link>
+
                 </div>
             </div>
 

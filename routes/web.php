@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\Admin\InternshipController;
 
 
 Route::get('/', function () {
@@ -28,12 +29,14 @@ Route::middleware([
 
 });
 
+
 Route::middleware(['auth'])->group(function(){
 
      //Admin Routes
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/admin/manageusers', [AdminController::class, 'index'])->name('admin.manageUsers');
+
 
     // Route to show the create user form
     Route::get('admin/create', [AdminController::class, 'create'])->name('admin.create');
@@ -52,6 +55,17 @@ Route::middleware(['auth'])->group(function(){
 
     // Route to delete a user
     Route::delete('admin/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+    //Manage Internships routes
+    Route::prefix('admin')->group(function () {
+        Route::get('/manageInternships', [InternshipController::class, 'index'])->name('admin.manageInternships');
+        Route::get('/internships/{id}', [InternshipController::class, 'show'])->name('admin.internships.show');
+        Route::get('/internships/create', [InternshipController::class, 'create'])->name('admin.internships.create');
+        Route::post('/internships', [InternshipController::class, 'store'])->name('admin.internships.store');
+        Route::get('/internships/{id}/edit', [InternshipController::class, 'edit'])->name('admin.internships.edit');
+        Route::put('/internships/{id}', [InternshipController::class, 'update'])->name('admin.internships.update');
+        Route::delete('/internships/{id}', [InternshipController::class, 'destroy'])->name('admin.internships.destroy');
+    });
 
 
     //Student Routes

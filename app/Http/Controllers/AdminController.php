@@ -10,18 +10,30 @@ class AdminController extends Controller
 {
     /**
      * Display the admin dashboard.
-     */
-    public function dashboard()
-    {
-        return view('admin.dashboard');
-    }
+     */public function dashboard()
+{
+    // Fetch necessary data
+    $studentCount = Role::where('name', 'Student')->first()->users->count();
+    $employerCount = Role::where('name', 'Employer')->first()->users->count();
+    $activeUsersCount = User::where('active', true)->count();
+    $inactiveUsersCount = User::where('active', false)->count();
+
+    // Return view with data
+    return view('admin.dashboard', [
+        'studentCount' => $studentCount,
+        'employerCount' => $employerCount,
+        'activeUsersCount' => $activeUsersCount,
+        'inactiveUsersCount' => $inactiveUsersCount,
+    ]);
+}
+
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::with('role')->paginate(3);
+        $users = User::with('role')->paginate(8);
 
         return view('admin.manageusers', compact('users'));
     }
