@@ -61,32 +61,56 @@ class InternshipsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Internships $internships)
+    public function show(Internships $internship)
     {
-        return view('employer.internships.show');
+        return view('employer.internships.show', compact('internship'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Internships $internships)
+    public function edit(Internships $internship)
     {
-        return view('employer.internships.edit');
+        $userId = Auth::id(); // Retrieve the authenticated user's ID
+        return view('employer.internships.edit', compact('internship', 'userId'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Internships $internships)
+    public function update(Request $request, Internships $internship)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
+            'description' => 'required|string',
+            'requirements' => 'required|string',
+            'application_deadline' => 'required|date',
+            'stipend_salary' => 'nullable|string|max:255',
+            'contact_information' => 'required|string|max:255',
+            'company_overview' => 'nullable|string',
+            'benefits' => 'nullable|string',
+            'working_hours' => 'required|string|max:255',
+            'eligibility_criteria' => 'required|string',
+        ]);
+        $data = $request->all();
+        $data['company_id'] = Auth::id(); // Set the company_id to the logged-in user's ID
+
+
+        $internship->update($data);
+
+
+        return redirect()->route('internships.index')->with('status', 'Internship Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Internships $internships)
+    public function destroy(Internships $internship)
     {
-        //
+        $internship->delete();
+        return redirect()->route('internships.index')->with('status','Internship Deleted Successfully');
     }
 }

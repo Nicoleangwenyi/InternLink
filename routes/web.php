@@ -75,7 +75,7 @@ Route::middleware(['auth'])->group(function(){
     //Employer Routes
     Route::get('/employer/dashboard', [EmployerController::class, 'index'])->name('employer.dashboard');
 
-    
+
 
     Route::get('internships', [InternshipsController::class, 'index'])->name('internships.index');
 
@@ -88,5 +88,7 @@ Route::middleware(['auth'])->group(function(){
         'update' => 'internships.update',
         'destroy' => 'internships.destroy',
     ]);
+
+    
 });
 

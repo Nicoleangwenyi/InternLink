@@ -54,11 +54,11 @@
                                         <a href="{{ route('internships.edit', $internship->id) }}" class="btn btn-success">Edit</a>
                                         <a href="{{ route('internships.show', $internship->id) }}" class="btn btn-info">Show</a>
 
-                                        {{--<form action="{{ route('internships.destroy', $category->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('internships.destroy', $internship->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>--}}
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
