@@ -58,15 +58,9 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('admin/{user}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
     //Manage Internships routes
-    Route::prefix('admin')->group(function () {
-        Route::get('/manageInternships', [InternshipController::class, 'index'])->name('admin.manageInternships');
-        Route::get('/internships/{id}', [InternshipController::class, 'show'])->name('admin.internships.show');
-        Route::get('/internships/create', [InternshipController::class, 'create'])->name('admin.internships.create');
-        Route::post('/internships', [InternshipController::class, 'store'])->name('admin.internships.store');
-        Route::get('/internships/{id}/edit', [InternshipController::class, 'edit'])->name('admin.internships.edit');
-        Route::put('/internships/{id}', [InternshipController::class, 'update'])->name('admin.internships.update');
-        Route::delete('/internships/{id}', [InternshipController::class, 'destroy'])->name('admin.internships.destroy');
-    });
+
+        Route::get('/manageInternships', [InternshipsController::class, 'manageInternships'])->name('admin.manageInternships');
+
 
 
     //Student Routes
