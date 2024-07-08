@@ -13,16 +13,16 @@
             <div x-data="{photoName: null, photoPreview: null}" class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" id="photo" class="hidden"
-                            wire:model.live="photo"
-                            x-ref="photo"
-                            x-on:change="
-                                    photoName = $refs.photo.files[0].name;
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        photoPreview = e.target.result;
-                                    };
-                                    reader.readAsDataURL($refs.photo.files[0]);
-                            " />
+                       wire:model.live="photo"
+                       x-ref="photo"
+                       x-on:change="
+                               photoName = $refs.photo.files[0].name;
+                               const reader = new FileReader();
+                               reader.onload = (e) => {
+                                   photoPreview = e.target.result;
+                               };
+                               reader.readAsDataURL($refs.photo.files[0]);
+                       " />
 
                 <x-label for="photo" value="{{ __('Photo') }}" />
 
@@ -64,23 +64,61 @@
             <x-label for="email" value="{{ __('Email') }}" />
             <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
-
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
-                <p class="text-sm mt-2">
-                    {{ __('Your email address is unverified.') }}
-
-                    <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
-
-                @if ($this->verificationLinkSent)
-                    <p class="mt-2 font-medium text-sm text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
-                    </p>
-                @endif
-            @endif
         </div>
+
+        <!-- Check if the authenticated user is a student (role_id 2) -->
+        @if (auth()->user()->role_id == 2)
+            <!-- Institution -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="institution" value="{{ __('Institution') }}" />
+                <x-input id="institution" type="text" class="mt-1 block w-full" wire:model="state.institution" autocomplete="institution" />
+                <x-input-error for="institution" class="mt-2" />
+            </div>
+
+            <!-- Education Qualification -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="education_qualification" value="{{ __('Education Qualification') }}" />
+                <x-input id="education_qualification" type="text" class="mt-1 block w-full" wire:model="state.education_qualification" autocomplete="education_qualification" />
+                <x-input-error for="education_qualification" class="mt-2" />
+            </div>
+
+            <!-- Start Date -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="start_date" value="{{ __('Start Date') }}" />
+                <x-input id="start_date" type="date" class="mt-1 block w-full" wire:model.defer="state.start_date" />
+                <x-input-error for="start_date" class="mt-2" />
+            </div>
+
+            <!-- End Date -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="end_date" value="{{ __('End Date') }}" />
+                <x-input id="end_date" type="date" class="mt-1 block w-full" wire:model.defer="state.end_date" />
+                <x-input-error for="end_date" class="mt-2" />
+            </div>
+
+            <!-- Description -->
+            <div class="col-span-6 sm:col-span-4">
+                <x-label for="description" value="{{ __('Portfolio') }}" />
+                <textarea id="description" class="mt-1 block w-full" wire:model.defer="state.description"></textarea>
+                <x-input-error for="description" class="mt-2" />
+            </div>
+        @endif
+
+        @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
+            <p class="text-sm mt-2">
+                {{ __('Your email address is unverified.') }}
+
+                <button type="button" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
+                    {{ __('Click here to re-send the verification email.') }}
+                </button>
+            </p>
+
+            @if ($this->verificationLinkSent)
+                <p class="mt-2 font-medium text-sm text-green-600">
+                    {{ __('A new verification link has been sent to your email address.') }}
+                </p>
+            @endif
+        @endif
     </x-slot>
 
     <x-slot name="actions">

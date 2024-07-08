@@ -105,7 +105,7 @@
                 labels: ['January', 'February', 'March', 'April', 'May'],
                 datasets: [{
                     label: 'Applications',
-                    data: [10, 15, 30, 25, 50], // Example data
+                    data: [0, 0, 0, 0, 0], // Example data
                     borderColor: 'rgba(153, 102, 255, 1)',
                     borderWidth: 1,
                     fill: true,
@@ -129,7 +129,7 @@
                 labels: ['January', 'February', 'March', 'April', 'May'],
                 datasets: [{
                     label: 'Postings',
-                    data: [5, 10, 20, 15, 30], // Example data
+                    data: [0, 0, 0, 0, 0], // Example data
                     backgroundColor: 'rgba(255, 159, 64, 0.2)',
                     borderColor: 'rgba(255, 159, 64, 1)',
                     borderWidth: 1
@@ -150,10 +150,10 @@
         var userRegistrationChart = new Chart(ctx4, {
             type: 'line',
             data: {
-                labels: ['January', 'February', 'March', 'April', 'May'],
+                labels: ['May','June','July','August'],
                 datasets: [{
                     label: 'Registrations',
-                    data: [20, 25, 40, 30, 60], // Example data
+                    data: [0, 0, 3], // Example data
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1,
                     fill: false

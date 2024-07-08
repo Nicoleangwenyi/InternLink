@@ -17,11 +17,24 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update(User $user, array $input): void
     {
-        Validator::make($input, [
+        $rules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ])->validateWithBag('updateProfileInformation');
+        ];
+
+        // Add additional rules for students (role_id 2)
+        if ($user->role_id == 2) {
+            $rules = array_merge($rules, [
+                'institution' => ['required', 'string', 'max:255'],
+                'education_qualification' => ['required', 'string', 'max:255'],
+                'start_date' => ['required', 'date'],
+                'end_date' => ['required', 'date', 'after:start_date'],
+                'description' => ['nullable', 'string'],
+            ]);
+        }
+
+        Validator::make($input, $rules)->validateWithBag('updateProfileInformation');
 
         if (isset($input['photo'])) {
             $user->updateProfilePhoto($input['photo']);
@@ -35,6 +48,17 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'name' => $input['name'],
                 'email' => $input['email'],
             ])->save();
+
+            // Update additional fields for students (role_id 2)
+            if ($user->role_id == 2) {
+                $user->forceFill([
+                    'institution' => $input['institution'],
+                    'education_qualification' => $input['education_qualification'],
+                    'start_date' => $input['start_date'],
+                    'end_date' => $input['end_date'],
+                    'description' => $input['description'],
+                ])->save();
+            }
         }
     }
 
@@ -52,5 +76,16 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         ])->save();
 
         $user->sendEmailVerificationNotification();
+
+        // Update additional fields for students (role_id 2)
+        if ($user->role_id == 2) {
+            $user->forceFill([
+                'institution' => $input['institution'],
+                'education_qualification' => $input['education_qualification'],
+                'start_date' => $input['start_date'],
+                'end_date' => $input['end_date'],
+                'description' => $input['description'],
+            ])->save();
+        }
     }
 }
