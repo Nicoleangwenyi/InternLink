@@ -27,4 +27,8 @@ class Internships extends Model
         'working_hours',
         'eligibility_criteria'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

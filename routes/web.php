@@ -65,6 +65,10 @@ Route::middleware(['auth'])->group(function(){
 
     //Student Routes
     Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+    Route::get('/student/internships', [StudentController::class, 'internships'])->name('internships');
+    Route::get('/student/apply', [StudentController::class, 'apply'])->name('internships.apply');
+    Route::get('/student/show', [StudentController::class, 'show'])->name('student.show');
+
 
     //Employer Routes
     Route::get('/employer/dashboard', [EmployerController::class, 'index'])->name('employer.dashboard');
@@ -83,6 +87,6 @@ Route::middleware(['auth'])->group(function(){
         'destroy' => 'internships.destroy',
     ]);
 
-    
+
 });
 

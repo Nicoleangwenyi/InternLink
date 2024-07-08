@@ -11,6 +11,7 @@ class InternshipsController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
 
      public function  manageInternships(){
         $employerId = Auth::user()->id;
@@ -21,6 +22,7 @@ class InternshipsController extends Controller
      }
     public function index()
     {
+        $user = Auth::user()->id;
         $internships = Internships::paginate(10);
         return view('employer.internships.index', [
             'internships'=> $internships]
