@@ -48,7 +48,6 @@ internLink is a web platform designed to connect university students with valuab
     ```sh
     composer install
     npm install
-    npm run dev
     ```
 
 3. **Environment configuration**:
