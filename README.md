@@ -91,6 +91,7 @@ We welcome contributions! Please fork the repository and create a pull request w
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+
 ## Contact
 
 For any inquiries or support, please reach out to [savayichelsea90@gmail.com, nicolemoraa54@gmail.com].
@@ -98,7 +99,3 @@ For any inquiries or support, please reach out to [savayichelsea90@gmail.com, ni
 ---
 
 Thank you for using internLink! Together, we can help students gain valuable work experience and employers find talented interns.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
