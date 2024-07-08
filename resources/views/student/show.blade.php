@@ -1,4 +1,6 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" >
+@extends('employer.internships.layouts')
+
+@section('content')
 
     <div class="container">
         <div class="row">
@@ -10,74 +12,77 @@
                         </h4>
                     </div>
                     <div class="card-body">
+
+
+
                         <div class="mb-3">
-                            <label>Title</label>
-                            <p>{{ $internships->title }}</p>
+                            <label><b>Title</b></label>
+                            <p>{{ $internship->title }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Location</label>
-                            <p>{{ $internships->location }}</p>
+                            <label><b>Location</b></label>
+                            <p>{{ $internship->location }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Start Date</label>
-                            <p>{{ $internships->start_date ? \Carbon\Carbon::parse($internships->start_date)->format('Y-m-d') : 'N/A' }}</p>
+                            <label><b>Start Date</b></label>
+                            <p>{{ $internship->start_date ? \Carbon\Carbon::parse($internship->start_date)->format('Y-m-d') : 'N/A' }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>End Date</label>
-                            <p>{{ $internships->end_date ? \Carbon\Carbon::parse($internships->end_date)->format('Y-m-d') : 'N/A' }}</p>
+                            <label><b>End Date</b></label>
+                            <p>{{ $internship->end_date ? \Carbon\Carbon::parse($internship->end_date)->format('Y-m-d') : 'N/A' }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Description</label>
-                            <p>{{ $internships->description }}</p>
+                            <label><b>Description,</b></label>
+                            <p>{{ $internship->description }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Requirements</label>
-                            <p>{{ $internships->requirements }}</p>
+                            <label><b>Requirements</b></label>
+                            <p>{{ $internship->requirements }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Application Deadline</label>
-                            <p>{{ $internships->application_deadline ? \Carbon\Carbon::parse($internships->application_deadline)->format('Y-m-d') : 'N/A' }}</p>
+                            <label><b>Application Deadline</b></label>
+                            <p>{{ $internship->application_deadline ? \Carbon\Carbon::parse($internship->application_deadline)->format('Y-m-d') : 'N/A' }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Stipend/Salary</label>
-                            <p>{{ $internships->stipend_salary }}</p>
+                            <label><b>Salary</b></label>
+                            <p>{{ $internship->stipend_salary }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Contact Information</label>
-                            <p>{{ $internships->contact_information }}</p>
+                            <label><b>Contact Information</b></label>
+                            <p>{{ $internship->contact_information }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Company Overview</label>
-                            <p>{{ $internships->company_overview }}</p>
+                            <label><b>Company Overview</b></label>
+                            <p>{{ $internship->company_overview }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Benefits</label>
-                            <p>{{ $internships->benefits }}</p>
+                            <label><b>Benefits</b></label>
+                            <p>{{ $internship->benefits }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Working Hours</label>
-                            <p>{{ $internships->working_hours }}</p>
+                            <label><b>Working Hours</b></label>
+                            <p>{{ $internship->working_hours }}</p>
                         </div>
 
                         <div class="mb-3">
-                            <label>Eligibility Criteria</label>
-                            <p>{{ $internships->eligibility_criteria }}</p>
+                            <label><b>Eligibility Criteria</b></label>
+                            <p>{{ $internship->eligibility_criteria }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
+@endsection

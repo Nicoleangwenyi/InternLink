@@ -11,7 +11,7 @@ class InternshipsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
 
      public function  manageInternships(){
         $employerId = Auth::user()->id;
@@ -73,7 +73,8 @@ class InternshipsController extends Controller
      */
     public function show(Internships $internship)
     {
-        return view('employer.internships.show', compact('internship'));
+        $userId = Auth::id();
+        return view('employer.internships.show', compact('internship', 'userId'));
     }
 
     /**
