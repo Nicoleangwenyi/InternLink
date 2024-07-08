@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Internships;
 use App\Models\Applications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -21,9 +22,10 @@ class StudentController extends Controller
     {
         return view('student.apply');
     }
-    public function show(Internships $internships)
+    public function show(Internships $internship)
     {
-        return view('student.show', compact('internships'));
+        $userId = Auth::id();
+        return view('student.show', compact('internship', 'userId'));
     }
 
 }

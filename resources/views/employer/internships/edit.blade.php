@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Stipend/Salary</label>
+                                <label>Salary</label>
                                 <input type="text" name="stipend_salary" class="form-control" value="{{ $internship->stipend_salary }}" />
                                 @error('stipend_salary') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
