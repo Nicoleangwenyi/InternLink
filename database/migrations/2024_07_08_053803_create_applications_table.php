@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('internship_id');
 
-            $table->longText('cover_letter');
+            $table->string('cover_letter');
             $table->string('resume'); // Store resume file path
             $table->string('status')->default('pending'); // Application status
             $table->timestamp('applied_at')->useCurrent(); // Date and time of application

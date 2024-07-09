@@ -22,8 +22,9 @@ class InternshipsController extends Controller
      }
     public function index()
     {
-        $user = Auth::user()->id;
-        $internships = Internships::paginate(10);
+        $companyId = Auth::id();
+    $internships = Internships::where('company_id', $companyId)->paginate(10);
+
         return view('employer.internships.index', [
             'internships'=> $internships]
 

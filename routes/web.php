@@ -68,6 +68,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/student/internships', [StudentController::class, 'internships'])->name('internships');
     Route::get('/student/apply', [StudentController::class, 'apply'])->name('internships.apply');
     Route::get('/student/show', [StudentController::class, 'show'])->name('student.show');
+    Route::get('/student/store', [StudentController::class, 'store'])->name('student.store');
 
 
     //Employer Routes
