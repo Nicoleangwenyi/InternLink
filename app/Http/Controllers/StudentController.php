@@ -36,10 +36,18 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cover_letter' =>  'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048',
-            'resume' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048', // Example validation for resume file
+            'cover_letter' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048',
+            'resume' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048',
+        ], [
+            'cover_letter.required' => 'Please upload a cover letter.',
+            'cover_letter.file' => 'The cover letter must be a file.',
+            'cover_letter.mimes' => 'The cover letter must be a PDF, DOC, DOCX, XLS, XLSX, or CSV file.',
+            'cover_letter.max' => 'The cover letter may not be greater than 2048 kilobytes.',
+            'resume.required' => 'Please upload a resume.',
+            'resume.file' => 'The resume must be a file.',
+            'resume.mimes' => 'The resume must be a PDF, DOC, DOCX, XLS, XLSX, or CSV file.',
+            'resume.max' => 'The resume may not be greater than 2048 kilobytes.',
         ]);
-
         // Retrieve the authenticated user's ID
         $userId = Auth::id();
 
