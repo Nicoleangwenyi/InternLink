@@ -23,7 +23,7 @@
 
                                 <div class="mb-3">
                                     <label>Cover Letter</label>
-                                    <input type="file" name="resume" class="form-control" />
+                                    <input type="file" name="cover_letter" class="form-control" />
                                     @error('cover_letter') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
 
@@ -33,6 +33,8 @@
                                     <input type="file" name="resume" class="form-control" />
                                     @error('resume') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
+                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="internship_id" value="{{ $internship->id }}">
 
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Apply</button>

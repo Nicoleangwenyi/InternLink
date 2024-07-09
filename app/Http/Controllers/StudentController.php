@@ -19,10 +19,11 @@ class StudentController extends Controller
             'internships'=> $internships]);
     }
 
-    public function apply()
+    public function apply($internshipId)
     {
         $userId = Auth::id();
-        return view('student.apply', compact('userId'));
+        $internship = Internships::findOrFail($internshipId);
+        return view('student.apply', compact('userId', 'internship'));
     }
     public function show(Internships $internship)
     {
@@ -35,8 +36,8 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'cover_letter' =>  'required|file|mimes:pdf,doc,docx|max:2048',
-            'resume' => 'required|file|mimes:pdf,doc,docx|max:2048', // Example validation for resume file
+            'cover_letter' =>  'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048',
+            'resume' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,csv|max:2048', // Example validation for resume file
         ]);
 
         // Retrieve the authenticated user's ID
@@ -45,14 +46,13 @@ class StudentController extends Controller
         // Create a new application record
         $application = new Applications();
         $application->user_id = $userId;
-        $application->application_id = $request->application_id; // Assuming this is set in your form or passed somehow
-
+        $application->internship_id = $request->internship_id;
 
 
         // Handle file upload for cover letter
         if ($request->hasFile('cover_letter')) {
-            $resumePath = $request->file('cover_letter')->store('cover_letters'); // Example storage location
-            $application->resume = $resumePath;
+            $coverLetterPath = $request->file('cover_letter')->store('cover_letters'); // Example storage location
+            $application->cover_letter = $coverLetterPath;
         }
 
 
