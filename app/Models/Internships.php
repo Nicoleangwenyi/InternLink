@@ -31,4 +31,12 @@ class Internships extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function applications()
+    {
+        return $this->hasMany(Applications::class, 'internship_id');
+    }
+    public function company()
+    {
+        return $this->belongsTo(User::class, 'company_id');
+    }
 }
