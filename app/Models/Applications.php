@@ -19,8 +19,13 @@ class  Applications extends Model
         'status',
         'applied_at',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    public function internship()
+{
+    return $this->belongsTo(Internships::class, 'internship_id');
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class, 'user_id');
+}
 }

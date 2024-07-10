@@ -17,7 +17,7 @@
                     </x-nav-link>
 
                     <x-nav-link href="{{ route('internships.index') }}" :active="request()->routeIs('internships.index')">
-                        {{ __('View Internships') }}
+                        {{ __('My Internships') }}
                     </x-nav-link>
                     <x-nav-link href="{{ route('internships.create') }}" :active="request()->routeIs('internships.create')">
                         {{ __('Post Internship') }}
