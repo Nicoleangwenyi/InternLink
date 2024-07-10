@@ -1,4 +1,4 @@
-<!-- manage.blade.php (located in resources/views/admin/internships) -->
+
 
 @extends('admin.layout')
 
