@@ -28,6 +28,7 @@
                             <thead>
                                 <tr>
                                     <th>Title</th>
+                                    <th>Status</th>
                                     <th>Description</th>
                                     <th>Requirements</th>
                                     <th>Location</th>
@@ -42,6 +43,7 @@
                                 @foreach ($internships as $internship)
                                 <tr>
                                     <td>{{ $internship->title }}</td>
+                                    <td>{{ $internship->status }}</td>
                                     <td>{{ $internship->description }}</td>
                                     <td>{{ $internship->requirements }}</td>
                                     <td>{{ $internship->location }}</td>

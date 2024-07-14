@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Applications;
+use App\Models\Internships;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -12,11 +14,30 @@ class AdminController extends Controller
      * Display the admin dashboard.
      */public function dashboard()
 {
+    // Applicants per month
+    $applicants = Applications::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+    ->groupBy('year', 'month')
+    //->orderBy('year', 'month')
+    ->get();
+
+    // Users per month
+    $users = User::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('year', 'month')
+       // ->orderBy('year', 'month')
+        ->get();
+
+    // Internships per month
+    $internships = Internships::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as count')
+        ->groupBy('year', 'month')
+        //->orderBy('year', 'month')
+        ->get();
+
+
     // Fetch necessary data
     $studentCount = Role::where('name', 'Student')->first()->users->count();
     $employerCount = Role::where('name', 'Employer')->first()->users->count();
-    $activeUsersCount = User::where('active', true)->count();
-    $inactiveUsersCount = User::where('active', false)->count();
+    $activeUsersCount = User::where('account_status', 'active')->count();
+    $inactiveUsersCount = User::where('account_status', 'suspended')->count();
 
     // Return view with data
     return view('admin.dashboard', [
@@ -24,6 +45,9 @@ class AdminController extends Controller
         'employerCount' => $employerCount,
         'activeUsersCount' => $activeUsersCount,
         'inactiveUsersCount' => $inactiveUsersCount,
+         'applicants' => $applicants,
+         'users' =>$users,
+         'internships' => $internships,
     ]);
 }
 
@@ -116,4 +140,27 @@ class AdminController extends Controller
         $user->delete();
         return redirect()->route('admin.manageUsers')->with('status', 'User Deleted Successfully');
     }
+
+    public function suspend($id)
+    {
+        $user = User::find($id);
+        $user->account_status = 'suspended';
+        $user->save();
+        
+        $users = User::with('role')->paginate(8);
+        return view('admin.manageusers', compact('users'));
+    }
+
+    public function activate($id)
+    {
+        $user = User::find($id);
+        $user->account_status = 'active';
+        $user->save();
+        
+        $users = User::with('role')->paginate(8);
+
+        return view('admin.manageusers', compact('users'));
+       
+    }
+
 }

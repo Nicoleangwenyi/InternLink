@@ -28,6 +28,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Acount Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -38,6 +39,16 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->role->name }}</td>
                                     <td>
+                                        @if ($user->account_status == 'active')
+                                            <span class="badge bg-success">{{ $user->account_status }}</span>
+                                        @elseif ($user->account_status == 'suspended')
+                                            <span class="badge bg-danger">{{ $user->account_status }}</span>
+                                        @else
+                                            <span class="badge bg-secondary">{{ $user->account_status }}</span>
+                                        @endif
+                                    </td>
+                                    <td>
+
                                         <a href="{{ route('admin.edit', $user->id) }}" class="btn btn-success">Edit</a>
                                         <a href="{{ route('admin.show', $user->id) }}" class="btn btn-info">Show</a>
                                         <form action="{{ route('admin.destroy', $user->id) }}" method="POST" class="d-inline">
@@ -45,6 +56,21 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
+
+                                        @if ($user->account_status == 'active')
+                                    
+                                            <form action="{{ route('admin.suspend', $user->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-warning">Suspend</button>
+                                            </form>
+                                        @elseif ($user->account_status == 'suspended')
+                                            <form action="{{ route('admin.activate', $user->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn btn-primary">Activate</button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -22,7 +22,10 @@
                     <x-nav-link href="{{ route('internships.create') }}" :active="request()->routeIs('internships.create')">
                         {{ __('Post Internship') }}
                     </x-nav-link>
-                    
+                    <x-nav-link href="{{ route('applications.info') }}" :active="request()->routeIs('internships.create')">
+                        {{ __('Applications')}}
+                    </x-nav-link>
+
 
                 </div>
             </div>

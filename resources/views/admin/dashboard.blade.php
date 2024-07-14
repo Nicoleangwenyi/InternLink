@@ -33,8 +33,7 @@
                     <!-- Bar Chart for Internship Postings by Month -->
                     <div class="col-md-3">
                         <h2>Internship Postings by Month</h2>
-                        <div style="height: 500px; width: 500px;">
-                            <br><br><br><br><br><br>
+                        <div style="height: 500px; width: 500px;">                                                   
                             <canvas id="internshipPostingsChart"></canvas>
                         </div>
                     </div>
@@ -57,25 +56,22 @@
         var userDistributionChart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Students', 'Employers', 'Active Users', 'Inactive Users'],
+                labels: ['Students', 'Employers'],
                     datasets: [{
                         data: [
                             {{ $studentCount }},
                             {{ $employerCount }},
-                            {{ $activeUsersCount }},
-                            {{ $inactiveUsersCount }}
+                            
                         ],
                     backgroundColor: [
                         'rgba(95, 240, 192, 0.2)',
                         'rgba(94, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(255, 99, 132, 0.2)'
+                        
                     ],
                     borderColor: [
                         'rgba(95, 192, 192, 1)',
                         'rgba(94, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(255, 99, 132, 1)'
+                       
                     ],
                     borderWidth: 1
                 }]
@@ -97,75 +93,110 @@
                     }
         });
 
-        // Internship Applications Chart
-        var ctx2 = document.getElementById('internshipApplicationsChart').getContext('2d');
-        var internshipApplicationsChart = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May'],
-                datasets: [{
-                    label: 'Applications',
-                    data: [0, 0, 0, 0, 0], // Example data
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1,
-                    fill: true,
-                    backgroundColor: 'rgba(153, 102, 255, 0.2)'
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+       
+        function formatData(data) {
+        const labels = [];
+        const counts = [];
+        data.forEach(item => {
+            labels.push(item.year + '-' + String(item.month).padStart(2, '0'));
+            counts.push(item.count);
+        });
+        return { labels, counts };
+    }
+
+    // Internship Applications data
+    const internshipApplicationsData = @json($applicants);
+    const formattedInternshipApplicationsData = formatData(internshipApplicationsData);
+
+    // Internship Applications Chart
+    var ctx2 = document.getElementById('internshipApplicationsChart').getContext('2d');
+    var internshipApplicationsChart = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: formattedInternshipApplicationsData.labels,
+            datasets: [{
+                label: 'Applications',
+                data: formattedInternshipApplicationsData.counts,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1,
+                fill: true,
+                backgroundColor: 'rgba(153, 102, 255, 0.2)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
 
-        // Internship Postings by Month Chart
-        var ctx3 = document.getElementById('internshipPostingsChart').getContext('2d');
-        var internshipPostingsChart = new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May'],
-                datasets: [{
-                    label: 'Postings',
-                    data: [0, 0, 0, 0, 0], // Example data
-                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                    borderColor: 'rgba(255, 159, 64, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+         // Internship Postings data
+    const internshipPostingsData = @json($internships);
+    const formattedInternshipPostingsData = formatData(internshipPostingsData);
+
+    // Internship Postings Chart
+   var ctx3 = document.getElementById('internshipPostingsChart').getContext('2d');
+    var internshipApplicationsChart = new Chart(ctx3, {
+        type: 'line',
+        data: {
+            labels: formattedInternshipPostingsData.labels,
+            datasets: [{
+                label: 'Internship Postings',
+                data: formattedInternshipPostingsData.counts,
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderColor: 'rgba(255, 159, 64, 1)',
+                borderWidth: 1,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
 
 
-        // User Registration Trends Chart
-        var ctx4 = document.getElementById('userRegistrationChart').getContext('2d');
-        var userRegistrationChart = new Chart(ctx4, {
-            type: 'line',
-            data: {
-                labels: ['May','June','July','August'],
-                datasets: [{
-                    label: 'Registrations',
-                    data: [0, 0, 3], // Example data
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: false
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+    // Internship Postings data
+    const userData = @json($users);
+    const formattedUserData = formatData(userData);
+
+    // Internship Postings Chart
+   var ctx4 = document.getElementById('userRegistrationChart').getContext('2d');
+    var userDataChart = new Chart(ctx4, {
+        type: 'line',
+        data: {
+            labels: formattedUserData.labels,
+            datasets: [{
+                label: 'User  Registration Trends ',
+                data: formattedUserData.counts,
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
+
+
     </script>
 </x-app-layout>
