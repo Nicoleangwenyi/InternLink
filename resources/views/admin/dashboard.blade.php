@@ -33,7 +33,7 @@
                     <!-- Bar Chart for Internship Postings by Month -->
                     <div class="col-md-3">
                         <h2>Internship Postings by Month</h2>
-                        <div style="height: 500px; width: 500px;">                                                   
+                        <div style="height: 500px; width: 500px;">
                             <canvas id="internshipPostingsChart"></canvas>
                         </div>
                     </div>
@@ -61,17 +61,17 @@
                         data: [
                             {{ $studentCount }},
                             {{ $employerCount }},
-                            
+
                         ],
                     backgroundColor: [
                         'rgba(95, 240, 192, 0.2)',
                         'rgba(94, 162, 235, 0.2)',
-                        
+
                     ],
                     borderColor: [
                         'rgba(95, 192, 192, 1)',
                         'rgba(94, 162, 235, 1)',
-                       
+
                     ],
                     borderWidth: 1
                 }]
@@ -93,7 +93,7 @@
                     }
         });
 
-       
+
         function formatData(data) {
         const labels = [];
         const counts = [];

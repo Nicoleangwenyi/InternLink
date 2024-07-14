@@ -3,7 +3,7 @@
 @extends('admin.layout')
 
 @section('content')
-    
+
 @endsection--}}
 
 <x-app-layout>
@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Manage Internships                      
+                                <h4>Manage Internships
                                     <a href="{{ route('admin.manageUsers') }}" class="btn btn-primary float-end">Back</a>
                                 </h4>
                             </div>
@@ -53,7 +53,7 @@
                                                 <td>{{ $internship->end_date }}</td>
                                                 <td>{{ $internship->status }}</td>
                                                {{--@if($internship->user)
-                                                    <td>{{ $internship->user->name }}</td>                                            
+                                                    <td>{{ $internship->user->name }}</td>
                                                 @else
                                                     <td >No User Assigned</td>
                                                 @endif--}}
@@ -77,8 +77,8 @@
                                                             </form>
                                                         @endif
                                                     </td>
-                                                    
-                                                    
+
+
                                                     <!-- Add more actions as needed -->
                                                 </td>
                                             </tr>
