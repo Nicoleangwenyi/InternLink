@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployerController;
-use App\Http\Controllers\Admin\InternshipController;
-use App\Http\Controllers\InternshipsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LockScreenController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\InternshipsController;
+use App\Http\Controllers\Admin\InternshipController;
 
 
 Route::get('/', function () {
@@ -30,14 +31,16 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
 });
 
-
+// Routes for lock screen and unlock screen
+Route::get('/lock-screen', [LockScreenController::class, 'lock'])->name('lock-screen');
+Route::post('/unlock-screen', [LockScreenController::class, 'unlock'])->name('unlock-screen');
 
 
 Route::middleware(['auth'])->group(function(){
-   
+
     //route for displaying the charts
     Route::get('admin/statistics', [StatisticsController::class, 'index'])->name('admin.stats');;
 
