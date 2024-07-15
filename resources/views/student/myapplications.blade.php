@@ -26,11 +26,11 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Application ID</th>
+                                    <th>Internship ID</th>
                                     <th>Internship Title</th>
                                     <th>Application Date</th>
                                     <th>Application Status</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
