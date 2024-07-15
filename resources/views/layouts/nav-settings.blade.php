@@ -62,9 +62,9 @@
                                class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                <img class="h-8 w-8 rounded-full object-cover"
                                src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                                  
+
                                    <p>{{-- Auth::user()->profile_photo_url --}}</p> <!-- For debugging purposes -->
-       
+
                                 </button>
                        @else
                            <span class="inline-flex rounded-md">
@@ -92,7 +92,7 @@
                         {{ __('Home') }}
                        </x-dropdown-link>
 
-                       <x-dropdown-link href="{{ route('home') }}">
+                       <x-dropdown-link href="{{ route('lock-screen') }}">
                         {{ __('Lock Screen') }}
                         </x-dropdown-link>
 
