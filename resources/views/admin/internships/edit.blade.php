@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Edit Internship--Admin
+                        <h4>Internship Details
                             <a href="{{ route('admin.manageInternships') }}" class="btn btn-danger float-end">Back</a>
                         </h4>
                     </div>

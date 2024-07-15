@@ -58,7 +58,7 @@
                                                     <td >No User Assigned</td>
                                                 @endif--}}
                                                 <td>
-                                                    <a href="{{ route('internships.edit.admin', $internship->id) }}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{ route('internships.edit.admin', $internship->id) }}" class="btn btn-primary">Show</a>
                                                     <a href="{{-- route('admin.internships.edit', $internship->id) --}}" class="btn btn-danger">Delete</a>
                                                     <td>
                                                         @if($internship->status == 'pending')
